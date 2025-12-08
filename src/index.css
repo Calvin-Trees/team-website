@@ -21,6 +21,12 @@
   --color-input: hsl(240 5.9% 90%);
   --color-ring: hsl(240 5.9% 10%);
   --radius: 0.5rem;
+
+  /* Calvin University Brand Colors */
+  --color-maroon: #8B2233;
+  --color-maroon-hover: #6d1a28;
+  --color-gold: #F6CD19;
+  --color-gold-hover: #ddb715;
 }
 
 @media (prefers-color-scheme: dark) {
