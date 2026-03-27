@@ -11,12 +11,20 @@ import { FileText, Download, Layout } from 'lucide-react'
 
 const documents = [
   {
-    title: 'Project Presentation',
+    title: 'Project Presentation - Fall 2025',
     description:
       'Comprehensive presentation covering project milestones and design norms of previous project, as well as future development plans for the Calvin Trees application following our transition.',
     icon: Layout,
     file: '/docs/Dice Museum App Proj Update.pptx',
     type: 'PowerPoint Presentation',
+  },
+  {
+    title: 'Milestone Report #4',
+    description:
+      'Detailed milestone report documenting progress, achievements, and findings for the fourth milestone of the Calvin Trees project.',
+    icon: FileText,
+    file: '/docs/Milestone-4-Report.pdf',
+    type: 'PDF Document',
   },
 ]
 
