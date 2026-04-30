@@ -11,6 +11,22 @@ import { FileText, Download, Layout } from 'lucide-react'
 
 const documents = [
   {
+    title: 'Final Presentation',
+    description:
+      'Final presentation summarizing the Calvin Trees project: goals, design norms, technical approach, and outcomes from our semester of development.',
+    icon: Layout,
+    file: '/docs/Final-Presentation.pptx',
+    type: 'PowerPoint Presentation',
+  },
+  {
+    title: 'Final Report',
+    description:
+      'Final report documenting progress, achievements, and findings for the Calvin Trees project.',
+    icon: FileText,
+    file: '/docs/Final-Report.pdf',
+    type: 'PDF Document',
+  },
+  {
     title: 'Project Presentation - Fall 2025',
     description:
       'Comprehensive presentation covering project milestones and design norms of previous project, as well as future development plans for the Calvin Trees application following our transition.',
