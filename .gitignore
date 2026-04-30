@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Large binaries that exceed GitHub's 100 MB file limit.
+# These need to be hosted externally (Drive, etc.) and linked from the site.
+public/docs/Final-Presentation.pptx
+public/docs/Trees-App-Demo.mp4

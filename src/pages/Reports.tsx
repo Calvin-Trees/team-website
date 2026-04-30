@@ -7,15 +7,15 @@ import {
   CardFooter,
 } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { FileText, Download, Layout } from 'lucide-react'
+import { FileText, Download, Layout, Network } from 'lucide-react'
 
-const documents = [
+const finalDocuments = [
   {
-    title: 'Final Presentation',
+    title: 'Final Presentation (Demo Included)',
     description:
-      'Final presentation summarizing the Calvin Trees project: goals, design norms, technical approach, and outcomes from our semester of development.',
+      'Final presentation summarizing the Calvin Trees project: goals, design norms, technical approach, and outcomes from our semester of development. An embedded application demo video is included within the presentation.',
     icon: Layout,
-    file: '/docs/Final-Presentation.pptx',
+    file: 'https://docs.google.com/presentation/d/1RNYXxyda22E4PBcemxnHzqNK6h2-EVdK/export/pptx',
     type: 'PowerPoint Presentation',
   },
   {
@@ -26,6 +26,9 @@ const documents = [
     file: '/docs/Final-Report.pdf',
     type: 'PDF Document',
   },
+]
+
+const earlierDocuments = [
   {
     title: 'Project Presentation - Fall 2025',
     description:
@@ -44,6 +47,51 @@ const documents = [
   },
 ]
 
+type Doc = (typeof finalDocuments)[number]
+
+function DocumentCard({ doc }: { doc: Doc }) {
+  const Icon = doc.icon
+  const isExternal = /^https?:\/\//.test(doc.file)
+  return (
+    <Card className="hover:shadow-lg transition-shadow bg-white">
+      <CardHeader>
+        <div className="flex items-start gap-4">
+          <div className="p-3 bg-[#8B2233]/10 rounded-lg">
+            <Icon className="w-8 h-8 text-[#8B2233]" />
+          </div>
+          <div className="flex-1">
+            <CardTitle className="text-xl mb-2 text-[#8B2233]">{doc.title}</CardTitle>
+            <CardDescription className="text-base text-gray-600">
+              {doc.description}
+            </CardDescription>
+          </div>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <div className="flex items-center gap-2 text-sm text-gray-600">
+          <FileText className="w-4 h-4" />
+          <span>{doc.type}</span>
+        </div>
+      </CardContent>
+      <CardFooter className="flex justify-center">
+        <Button className="bg-[#8B2233] hover:bg-[#6d1a28] text-white" asChild>
+          {isExternal ? (
+            <a href={doc.file} target="_blank" rel="noopener noreferrer">
+              <Download className="w-4 h-4 mr-2" />
+              Download
+            </a>
+          ) : (
+            <a href={doc.file} download>
+              <Download className="w-4 h-4 mr-2" />
+              Download
+            </a>
+          )}
+        </Button>
+      </CardFooter>
+    </Card>
+  )
+}
+
 export function Reports() {
   return (
     <main className="py-16 px-4 bg-slate-50 min-h-screen">
@@ -56,46 +104,56 @@ export function Reports() {
         </p>
 
         <div className="space-y-6">
-          {documents.map((doc) => {
-            const Icon = doc.icon
-            return (
-              <Card
-                key={doc.title}
-                className="hover:shadow-lg transition-shadow bg-white"
-              >
-                <CardHeader>
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 bg-[#8B2233]/10 rounded-lg">
-                      <Icon className="w-8 h-8 text-[#8B2233]" />
-                    </div>
-                    <div className="flex-1">
-                      <CardTitle className="text-xl mb-2 text-[#8B2233]">{doc.title}</CardTitle>
-                      <CardDescription className="text-base text-gray-600">
-                        {doc.description}
-                      </CardDescription>
-                    </div>
-                  </div>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <FileText className="w-4 h-4" />
-                    <span>{doc.type}</span>
-                  </div>
-                </CardContent>
-                <CardFooter className="flex justify-center">
-                  <Button
-                    className="bg-[#8B2233] hover:bg-[#6d1a28] text-white"
-                    asChild
-                  >
-                    <a href={doc.file} download>
-                      <Download className="w-4 h-4 mr-2" />
-                      Download
-                    </a>
-                  </Button>
-                </CardFooter>
-              </Card>
-            )
-          })}
+          {finalDocuments.map((doc) => (
+            <DocumentCard key={doc.title} doc={doc} />
+          ))}
+
+          {/* Application Architecture Diagram */}
+          <Card className="bg-white">
+            <CardHeader>
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-[#8B2233]/10 rounded-lg">
+                  <Network className="w-8 h-8 text-[#8B2233]" />
+                </div>
+                <div className="flex-1">
+                  <CardTitle className="text-xl mb-2 text-[#8B2233]">
+                    Application Architecture
+                  </CardTitle>
+                  <CardDescription className="text-base text-gray-600">
+                    A high-level overview of how Calvin Trees is structured —
+                    from the device layer (browser, PWA, native) through the
+                    app's routing and components to its services, storage, and
+                    external integrations (tiles, Firebase).
+                  </CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="rounded-lg border border-gray-200 bg-slate-50 p-4">
+                <img
+                  src="/images/diagram.png"
+                  alt="Calvin Trees application architecture diagram"
+                  className="w-full h-auto rounded-md"
+                />
+              </div>
+            </CardContent>
+          </Card>
+
+          <div
+            role="separator"
+            aria-label="Earlier project materials"
+            className="flex items-center gap-4 pt-4"
+          >
+            <span className="h-px flex-1 bg-gray-300" />
+            <span className="text-xs uppercase tracking-widest text-gray-500 font-semibold">
+              Earlier Project Materials
+            </span>
+            <span className="h-px flex-1 bg-gray-300" />
+          </div>
+
+          {earlierDocuments.map((doc) => (
+            <DocumentCard key={doc.title} doc={doc} />
+          ))}
         </div>
 
         {/* Additional Info Box */}
